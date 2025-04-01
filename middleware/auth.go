@@ -1,14 +1,15 @@
 package middleware
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"strings"
+
+	"github.com/gofiber/fiber/v2"
 )
 
-// AuthMiddleware is a middleware for validating Bearer token
+// AuthMiddleware memvalidasi Bearer token
 func AuthMiddleware() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		// Get the Authorization header
+		// Mengambil Authorization header
 		authHeader := c.Get("Authorization")
 		if authHeader == "" {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
@@ -16,7 +17,7 @@ func AuthMiddleware() fiber.Handler {
 			})
 		}
 
-		// Check if the token is valid
+		// Mengecek apakah token valid
 		if !strings.HasPrefix(authHeader, "Bearer ") {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 				"error": "Unauthorized",
@@ -24,13 +25,13 @@ func AuthMiddleware() fiber.Handler {
 		}
 
 		token := strings.TrimPrefix(authHeader, "Bearer ")
-		if token != "your_static_token" { // Ganti dengan token yang valid
+		if token != "custom_token_1234567890abcdefgHIJKLMNOPQRSTUVWXYZ" { // token yang dianggap valid
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 				"error": "Unauthorized",
 			})
 		}
 
-		// Token valid, lanjutkan ke handler berikutnya
+		// Jika token valid, lanjutkan ke handler berikutnya
 		return c.Next()
 	}
 }

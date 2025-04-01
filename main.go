@@ -1,27 +1,28 @@
 package main
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"go_response/middleware"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-	app := fiber.New()
+	app := fiber.New() // Menginisiasi aplikasi dengan Fiber
 
-	// Endpoint publik
+	// Endpoint secara publik
 	app.Get("/public", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
-			"message": "This is a public endpoint",
+			"message": "Ini adalah endpoint publik.",
 		})
 	})
 
 	// Endpoint dengan middleware
 	app.Get("/protected", middleware.AuthMiddleware(), func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
-			"message": "This is a protected endpoint",
+			"message": "Ini adalah endpoint yang dilindungi.",
 		})
 	})
 
-	// Jalankan aplikasi
+	// Menjalankan aplikasi
 	app.Listen(":3000")
 }
