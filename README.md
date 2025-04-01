@@ -86,6 +86,3 @@ Untuk membersihkan file hasil kompilasi, jalankan:
 make clean
 ```
 
-## Lisensi
-Proyek ini bersifat open-source dan tersedia di bawah lisensi [MIT](LICENSE).
-
